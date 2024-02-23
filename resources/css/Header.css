@@ -1,0 +1,27 @@
+.header{
+    background-color: rgb(25, 89, 159);
+    border-bottom: 1px solid black;
+}
+
+.header .container {
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .container a {
+    color: #fff;
+}
+
+.header .container span {
+    color: #fff;
+    opacity:0.7;
+}
+
+.header__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
