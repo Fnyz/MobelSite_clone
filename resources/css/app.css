@@ -27,14 +27,16 @@
   }
   
   ul {
+    width: 50%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     gap: 20px;
     font-weight: bold;
     font-size: 15px;
     list-style: none;
     margin-bottom: 10px;
+   
   }
 
   a {
@@ -46,6 +48,7 @@
 
     color: red
   }
+  
 
   .error{
     color: red;

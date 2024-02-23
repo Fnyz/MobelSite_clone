@@ -6,8 +6,9 @@
 
 @include("partials.__links")
 
-<form action="" method="post">
+<form action="{{route("pages.Auth.login")}}" method="post">
     @csrf
+    @method("POST")
     <h2>Login</h2>
     <input type="text" name="email" placeholder="Email" value="{{ old('email') }}" required>
     @error('email')
