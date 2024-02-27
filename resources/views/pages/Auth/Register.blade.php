@@ -3,10 +3,8 @@
 @extends('layouts.app')
 @section('title', 'Homepage')
 @section('content')
-
-@include("partials.__links")
-
-
+<x-container>
+    @include("partials.__links")
 <form method="POST" action="{{ route("pages.Auth.register") }}">
     @csrf
     @method("POST")
@@ -49,5 +47,7 @@
 
     <button type="submit">Register</button>
 </form>
+
+</x-container>
 
 @endsection

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
+            $table->string("product_name");
             $table->string("description")->nullable();
             $table->string("image")->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
@@ -21,11 +21,9 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+ 
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('products');
     }
 };

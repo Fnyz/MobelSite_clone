@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 
 class DashboardController extends Controller
 {
@@ -11,7 +12,9 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        return view("pages.dashboard");
+
+         $product = Product::where("user_id", Auth::user()->id)->simplePaginate(2);
+         return view("pages.dashboard", compact("product"));
     }
 
     public function logout(Request $request)

@@ -1,4 +1,4 @@
 <div>
-    <input placeholder="{{$message}}">
-
+    <label>{{$label}}</label>
+    <input type="{{$type}}" placeholder="{{$message}}"  {{ $attributes->merge(['style' => 'border:1px solid #000;' . $style]) }}>
 </div>

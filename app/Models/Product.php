@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Product extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,12 @@ class Post extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+
+     protected $fillable = [
+        'title', 'description', 'image', 'user_id'
+    ];
+
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id');
