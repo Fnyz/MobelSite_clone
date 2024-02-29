@@ -12,17 +12,31 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+        return view('pages.dashboard');
+    }
 
-         $product = Product::where("user_id", Auth::user()->id)->simplePaginate(2);
-         return view("pages.dashboard", compact("product"));
+
+    
+    public function showProduct()
+    {
+  
+         $user = Auth::user();
+     
+         $products = $user->products()->where("user_id", $user->id)->orderBy('created_at', 'DESC')->simplePaginate(5);
+         return response()->json([
+            'products' => $products,
+            'pagination' => $products->links()->toHtml(),
+        ]);
+
+   
     }
 
     public function logout(Request $request)
     {
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-    return redirect(route("pages.Auth.login"));
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect(route("pages.Auth.login"));
     }
 
     

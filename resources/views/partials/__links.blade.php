@@ -14,7 +14,7 @@
       
     @auth
     <li>
-        <span>{{Auth::user()->email}}</span>
+        <span>{{Auth::user()->email}}  | </span>
      </li>
     <li>
         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -22,11 +22,6 @@
             @csrf
         </form>
     </li>
-
-    
-
-    
- 
     @endauth
   </li>
 </ul>

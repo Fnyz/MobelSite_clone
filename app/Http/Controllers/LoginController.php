@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    //
-     /**
+    /**
      * Show the login form.
      */
     public function showLoginForm(Request $request)
@@ -37,8 +36,7 @@ class LoginController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
-
-
-    
     }
+
+   
 }

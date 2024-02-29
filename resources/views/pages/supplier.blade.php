@@ -9,17 +9,15 @@
       @include("partials.__links")
 
 
-    @include('partials._title', ["title" => "COMPUTER-FY.CO"])
+    @include('partials._title', ["title" => "LIST OF SUPPLIER"])
 
-    <div style="margin-top:20px;">
-      <a href="{{route("pages.create")}}" style="margin-top:20px; font-weight:bold;">ADD PRODUCT</a>
+    <div>
+      <a href="{{route("pages.dashboard")}}" style="margin-top:20px; font-weight:bold;">GO BACK TO DASHBOARD</a>
       <span>/</span>
-      <a href="{{route("pages.supplier")}}" style="margin-top:20px; font-weight:bold;">SUPPLIER</a>
-      <span>/</span>
-      <a href="{{route("pages.create")}}" style="margin-top:20px; font-weight:bold;">TRANSACTION</a>
+      <a href="{{route("pages.create")}}" style="margin-top:20px; font-weight:bold;">ADD SUPPLIER</a>
     </div>
 
-    <form id="searchForm" action="{{route("search")}}" method="GET" style="margin-top:10px;">
+    <form id="searchForm" action="{{route("search")}}" method="GET">
      @csrf
 
         <input  type="text" id="query" placeholder="Search products..." >
@@ -30,13 +28,11 @@
     <table class="table" style="margin-top: 10px;">
       <thead>
         <tr>
-   
+          <th scope="col">#</th>
           <th scope="col">IMAGE</th>
           <th scope="col">PRODUCT</th>
-          <th scope="col">PRICE</th>
-          <th scope="col">QUANTITY</th>
           <th scope="col">DESCRIPTION</th>
-          <th scope="col">DATE</th>
+          <th scope="col">CREATE_AT</th>
           <th>ACTION</th>
         </tr>
       </thead>

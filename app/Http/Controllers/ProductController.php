@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -13,29 +14,101 @@ class ProductController extends Controller
         return view("pages.create");
     }
 
-    public function create(Request $request){
+    public function create(Request $request, Product $product){
+
 
         $validatedData = $request->validate([
             'product_name' => 'required|string|max:255',
             'description' => 'required|string',
+            'quantity' => 'required|numeric',
+            'price' => 'required|numeric',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Store the image file
         $imagePath = $request->file('image')->store('Images', 'public');
-
-        // Create a new post record
-        Product::create([
-            'product_name' => $validatedData['title'],
+       
+        $user = Auth::user();
+        $user->products()->create([
+            'product_name' => $validatedData['product_name'],
             'description' => $validatedData['description'],
+            'quantity' => $validatedData['quantity'],
+            'price' => $validatedData['price'],
             'image' => $imagePath,
             'user_id' => Auth::user()->id,
         ]);
 
-        // Redirect with success message
-        return redirect()->route("pages.dashboard")->with('success', 'Post created successfully');
+
+        return response()->json(['success' => 'Product created successfully.']);
         
     }
+
+    public function showEdit(Product $product){
+        return view('pages.edit', compact('product'));
+    }
+
+    public function edit(Request $request ,Product $product){
+
+        $request->validate([
+            'product_name' =>'string|max:255',
+            'description' =>'string',
+            'image' =>'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        
+        $user = Auth::user();
+      
+        $product = $user->products()->find($request->product->id);
+    
+        if (!$product) {
+            return response()->json(['error' => 'Product not found.'], 404);
+        }
+
+        $product->update([
+            'product_name' => $request->product_name,
+            'description' => $request->description,
+        ]);
+      
+        if ($request->hasFile('image')) {
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+        
+   
+            $imagePath = $request->file('image')->store('Images', 'public');
+            $product->update([
+                'image' => $imagePath,
+               
+            ]);
+          
+        }
+        
+        return response()->json(['success' => 'Product is updated successfully.']);
+        
+    }
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $products = Product::where('product_name', 'like', "%$query%")
+                    ->orWhere('description', 'like', "%$query%")
+                    ->simplePaginate(5);
+    
+       
+        return response()->json([
+            'products' => $products,
+            'pagination' => $products->links()->toHtml(),
+        ]);
+    }
+
+
+    public function delete(Product $product)
+    {
+        return $product->delete();
+      
+    }
+
+
 }
 
 

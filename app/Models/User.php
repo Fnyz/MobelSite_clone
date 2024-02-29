@@ -5,9 +5,10 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Post;
+use App\Models\Product;
 
 
 class User extends Authenticatable
@@ -51,11 +52,11 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
-    public function posts(): HasMany
-    {
-        return $this->hasMany(Post::class, 'user_id', 'id');
-    }
     
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'user_id', 'id');
+    }
   
     
 }
