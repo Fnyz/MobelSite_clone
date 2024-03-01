@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+       
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string("cus_fname");
-            $table->string("cus_lname");
-            $table->string("cus_phone");
+            $table->string("supp_company");
+            $table->string("supp_address")->nullable();
+            $table->string("supp_phone")->nullable();
+            $table->string("supp_image")->nullable();
             $table->timestamps();
         });
+
+
+
     }
 
     /**

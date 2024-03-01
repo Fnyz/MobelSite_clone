@@ -1,4 +1,6 @@
 import './bootstrap';
+import './supplier';
+import './transaction';
 
 $(document).ready(function() {
 

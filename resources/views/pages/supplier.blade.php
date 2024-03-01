@@ -1,7 +1,7 @@
 <!-- resources/views/child.blade.php -->
 
 @extends('layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'Supplier')
 @section('content')
 
 
@@ -14,10 +14,10 @@
     <div>
       <a href="{{route("pages.dashboard")}}" style="margin-top:20px; font-weight:bold;">GO BACK TO DASHBOARD</a>
       <span>/</span>
-      <a href="{{route("pages.create")}}" style="margin-top:20px; font-weight:bold;">ADD SUPPLIER</a>
+      <a href="{{route("pages.supplier.create")}}" style="margin-top:20px; font-weight:bold;">ADD SUPPLIER</a>
     </div>
 
-    <form id="searchForm" action="{{route("search")}}" method="GET">
+    <form id="supplierSearchForm" action="{{route("supplier.search")}}" method="GET">
      @csrf
 
         <input  type="text" id="query" placeholder="Search products..." >
@@ -28,22 +28,23 @@
     <table class="table" style="margin-top: 10px;">
       <thead>
         <tr>
-          <th scope="col">#</th>
+
           <th scope="col">IMAGE</th>
-          <th scope="col">PRODUCT</th>
-          <th scope="col">DESCRIPTION</th>
+          <th scope="col">COMPANY</th>
+          <th scope="col">ADDRESS</th>
+          <th scope="col">PHONE</th>
           <th scope="col">CREATE_AT</th>
           <th>ACTION</th>
         </tr>
       </thead>
-      <tbody class="table-group-divider" id="table__result">
+      <tbody class="table-group-divider" id="table__supplier">
 
 
       </tbody>
     </table>
 
 
-    <div id="paginationContainer" >
+    <div id="suppPaginationContainer" >
     </div>
 
   

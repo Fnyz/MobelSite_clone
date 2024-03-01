@@ -16,7 +16,7 @@
         <div style="color:red" id="product_name-error"></div> <!-- Error display -->
     </div>
 
-    <div
+    <div>
         <label for="quantity">Quantity:</label>
         <input type="number" id="quantity" name="quantity" value="{{ old('quantity') }}" style="padding: 10px;" >
         <div style="color:red" id="quantity-error"></div> <!-- Error display -->

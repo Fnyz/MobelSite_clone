@@ -16,7 +16,7 @@
       <span>/</span>
       <a href="{{route("pages.supplier")}}" style="margin-top:20px; font-weight:bold;">SUPPLIER</a>
       <span>/</span>
-      <a href="{{route("pages.create")}}" style="margin-top:20px; font-weight:bold;">TRANSACTION</a>
+      <a href="{{route("pages.transaction")}}" style="margin-top:20px; font-weight:bold;">TRANSACTION</a>
     </div>
 
     <form id="searchForm" action="{{route("search")}}" method="GET" style="margin-top:10px;">
