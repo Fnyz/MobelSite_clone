@@ -18,6 +18,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\RequestController;
 
 
 Route::middleware(['guest'])->group(function () {
@@ -37,6 +39,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/{product}/edit', [ProductController::class, 'showEdit'])->name('pages.edit');
     Route::get('/dashboard/search', [ProductController::class, 'search'])->name('search');
 
+
+    //position route 
+    Route::get('/position', [PositionController::class, 'showPosition'])->name('pages.position');
+    Route::get('/product/request', [RequestController::class, 'showRequest'])->name('pages.request');
+
     //supplier route
     Route::get('/supplier', [SupplierController::class, 'showSupplier'])->name('pages.supplier');
     Route::get('/supplier/create', [SupplierController::class, 'create'])->name('pages.supplier.create');
@@ -50,6 +57,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/transaction/getSupplierAndProduct', [TransactionController::class, 'getProductandSupplier']);
     Route::get('/transaction/addTransacation', [TransactionController::class, 'showAddTransac'])->name('pages.transaction.transac');
     
+
+
+    //position post request
+    Route::post('/position/create', [PositionController::class, 'create']);
 
 
     Route::post('/supplier/create', [SupplierController::class, 'storeSupplier'])->name('storeSupplier');

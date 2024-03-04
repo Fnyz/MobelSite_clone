@@ -17,18 +17,6 @@
     </div>
 
     <div>
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" value="{{ old('quantity') }}" style="padding: 10px;" >
-        <div style="color:red" id="quantity-error"></div> <!-- Error display -->
-    </div>
-
-    <div>
-        <label for="price">Price</label>
-        <input type="number" id="price" name="price" value="{{ old('price') }}"  min="0" step="0.25" value="0.00" style="padding: 10px;">
-        <div style="color:red" id="price-error"></div> <!-- Error display -->
-    </div>
-
-    <div>
         <label for="description">Description:</label>
         <textarea id="description" name="description" rows="4" cols="50" style="padding: 10px;" >{{ old('description') }}</textarea>
         <div style="color:red" id="description-error"></div> <!-- Error display -->

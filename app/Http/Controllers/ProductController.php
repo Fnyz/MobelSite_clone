@@ -20,8 +20,8 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'product_name' => 'required|string|max:255',
             'description' => 'required|string',
-            'quantity' => 'required|numeric',
-            'price' => 'required|numeric',
+            'quantity' => 'numeric',
+            'price' => 'numeric',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -31,8 +31,8 @@ class ProductController extends Controller
         $user->products()->create([
             'product_name' => $validatedData['product_name'],
             'description' => $validatedData['description'],
-            'quantity' => $validatedData['quantity'],
-            'price' => $validatedData['price'],
+            'quantity' => null,
+            'price' => null,
             'image' => $imagePath,
             'user_id' => Auth::user()->id,
         ]);

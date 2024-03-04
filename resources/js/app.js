@@ -1,6 +1,9 @@
 import './bootstrap';
 import './supplier';
 import './transaction';
+import './positions';
+import './request';
+
 
 $(document).ready(function() {
 
@@ -30,7 +33,7 @@ $(document).ready(function() {
     const displayProducts = (products) => {
            $('#table__result').empty();
            if (products.length === 0) {
-            $('#table__result').append('<tr><td colspan="6" class="text text-center ">No products found</td></tr>');
+            $('#table__result').append('<tr><td colspan="8" class="text text-center ">No products found</td></tr>');
            } else {
             $.each(products, function(index, product) {
                 $('#table__result').append(
@@ -40,9 +43,10 @@ $(document).ready(function() {
                             <img src="storage/${product.image}" alt="Product Image" width="70px">
                         </td>
                         <td>${product.product_name}</td>
-                        <td>${product.quantity}</td>
-                        <td>${product.price}</td>
+                        <td>${!product.price ? 0.00 : product.price}</td>
+                        <td>${!product.quantity ? 0 : product.quantity}</td>
                         <td>${product.description}</td>
+                        <td style="color: ${product.Remarks === "UNAVAILABLE" ? "red" : "blue"};">${product.Remarks}</td>
                         <td>${moment(product.created_at).calendar()}</td>
                         <td>
 

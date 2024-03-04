@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Product;
+use App\Models\Position;
 
 
 class User extends Authenticatable
@@ -56,6 +57,11 @@ class User extends Authenticatable
     public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'user_id', 'id');
+    }
+
+    public function positions(): HasMany
+    {
+        return $this->hasMany(Position::class, 'user_id', 'id');
     }
   
     

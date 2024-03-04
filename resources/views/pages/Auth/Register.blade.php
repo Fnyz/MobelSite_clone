@@ -9,6 +9,13 @@
     @csrf
     @method("POST")
 
+    {{-- <select id="position" name="position" class="form-select" aria-label="Default select example" style="margin-top:10px;">
+        <option selected>Select Position</option>
+        <option value="Admin">Admin</option>
+        <option value="Employee">Employee</option>
+        <option value="Staff">Staff</option>
+    </select> --}}
+
     <div>
         <label for="name">Name</label>
         <input id="name" type="text" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
