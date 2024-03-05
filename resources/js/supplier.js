@@ -63,7 +63,7 @@ $(document).ready(function() {
    
         $('#table__supplier').empty();
         if (suppliers.length === 0) {
-         $('#table__supplier').append('<tr><td colspan="6" class="text text-center ">No products found</td></tr>');
+         $('#table__supplier').append('<tr><td colspan="6" class="text text-center ">NO SUPPLIER FOUND</td></tr>');
         } else {
          $.each(suppliers, function(index, supplier) {
              $('#table__supplier').append(

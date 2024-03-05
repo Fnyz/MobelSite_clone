@@ -9,7 +9,7 @@
       @include("partials.__links")
 
 
-    @include('partials._title', ["title" => "COMPUTER-FY.CO"])
+    @include('partials._title', ["title" =>  $position ==="Staff" ? "LIST OF REQUEST": "COMPUTER-FY.CO"])
 
     <div style="margin-top:20px;">
      @switch($position)
@@ -74,19 +74,19 @@
       </table>
         @break
 
-        @case("Staff")     
+        @case("Staff")
+        
+   
       <table class="table" style="margin-top: 10px;">
         <thead>
           <tr>
      
             <th scope="col">IMAGE</th>
             <th scope="col">PRODUCT</th>
-            <th scope="col">PRICE</th>
             <th scope="col">QUANTITY</th>
-            <th scope="col">DESCRIPTION</th>
-            <th scope="col">REMARKS</th>
             <th scope="col">DATE</th>
-            <th>ACTION</th>
+            <th scope="col">REMARKS</th>
+
           </tr>
         </thead>
         <tbody class="table-group-divider" id="table__result">

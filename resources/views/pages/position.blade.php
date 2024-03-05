@@ -30,7 +30,7 @@
                 [
                     'display:none' => $email == $users->email
                 ]
-               )>{{$users->email}}</option>     
+               )>{{$users->email}}{{$users->id}}</option>     
                
             @empty
             <option>No users found!</option>

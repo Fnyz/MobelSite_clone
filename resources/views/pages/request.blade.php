@@ -5,9 +5,16 @@
     <x-container>
     @include("partials.__links")
     @include('partials._title', ["title" => "REQUEST PRODUCT"])
+    
 
+    <a href="/dashboard" class="btn btn-danger " style="margin-top:20px;">RETURN</a>
+
+    @php
+         $random_id = date('Ymd') . rand(10000, 99999);
+    @endphp
     <form id="request_item" >
-    <select id="staff_id" class="form-select" name="staff_id" aria-label="Default select example" style="margin-top:20px;">
+    <input type="hidden" name="request_code" value="{{$random_id}}">
+    <select id="user_id" class="form-select" name="user_id" aria-label="Default select example" style="margin-top:20px;">
         <option selected>Select Staff</option>
         @forelse ($user as $usr)
         <option value="{{$usr->user_id}}">{{$usr->email}}</option>
@@ -16,7 +23,7 @@
         @endforelse
     </select>
 
-    <table class=" table table-bordered mb-5" style="width:100%; margin-top:10px;">
+    <table class=" table table-bordered" style="width:100%; margin-top:10px;">
         <thead>
             <tr>
                 <th>Product Name</th>
@@ -32,7 +39,7 @@
                         @forelse ($product as $prod)
                         <option value="{{$prod->prod_id}}">{{$prod->prod_name}}</option>
                         @empty
-                        <option value="Admin">Admin</option>
+                        <option value="Admin">No Product found</option>
                         @endforelse
                     </select>
                 </td>
@@ -58,6 +65,15 @@
         </tbody>
       </table>
     </form>
+
+
+
+    <form id="submitRequest" action="{{route("storeRequest")}}" >
+        @csrf
+        @method("POST")
+        <button type="submit" style="display: none;" class="btn btn-success" id="savePur" >Save Purchase</button>
+    </form>
+    
 
 
     </x-container>

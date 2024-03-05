@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -88,17 +90,70 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->input('query');
 
-        $products = Product::where('product_name', 'like', "%$query%")
-                    ->orWhere('description', 'like', "%$query%")
-                    ->simplePaginate(5);
+              $query = $request->input('query');
+        
+            $user = User::select('positions.employee_position as positions')
+            ->from('users as s')
+            ->rightJoin('positions', 's.id', '=', 'positions.user_id')
+            ->where('positions.user_id', Auth::user()->id)
+            ->get();
+            
+            $position = $user[0]->positions;
+
+
+
+            
     
-       
+            $products = Product::selectRaw("*, 
+            CASE 
+                WHEN p.quantity IS NULL OR p.price IS NULL THEN 'UNAVAILABLE'
+                ELSE 'AVAILABLE'
+            END AS Remarks
+        ")
+        ->from("products as p")
+        ->where(function($a) use ($query) {
+            $a->where("p.product_name", 'like', "%$query%")
+                ->orWhere("p.description", 'like', "%$query%");
+        })
+        ->orderByDesc("p.id")
+        ->simplePaginate(5);
+
+
+
+   
+          
+            $productRequestPaginated = DB::table(DB::raw('(
+                SELECT 
+                    r.user_id as userId,
+                    p.image AS image, 
+                    p.product_name AS prod_name,
+                    p.description, 
+                    r.quantity as quantity,
+                    p.created_at as created_at,
+                    CASE 
+                        WHEN p.quantity IS NULL OR p.price IS NULL THEN "PENDING"
+                        ELSE "ACTIVE"
+                    END AS Remarks
+                FROM products p
+                LEFT JOIN product_requests r ON p.id = r.product_id
+                WHERE p.product_name LIKE "%'.$query.'%"
+                OR p.description LIKE "%'.$query.'%"
+            ) as result'))
+            ->where('userId', Auth::user()->id)
+            ->simplePaginate(5);
+
+      
+        
+
         return response()->json([
+            'requestProduct' => $productRequestPaginated,
             'products' => $products,
-            'pagination' => $products->links()->toHtml(),
+            'positions' => $position,
+            'pagination' =>  $position === "Employee" ? $products->links()->toHtml() : $productRequestPaginated->links()->toHtml(),
         ]);
+      
+      
     }
 
 

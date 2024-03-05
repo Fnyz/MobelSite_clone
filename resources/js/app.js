@@ -23,22 +23,31 @@ $(document).ready(function() {
         type: 'GET',
         url: '/dashboard/showproduct',
         success: function(response) {
-            displayProducts(response.products.data);
+            
+            if(response.positions === "Staff"){
+                displayProducts(response.requestProduct, response.positions);
+                return;
+            }
+
+            displayProducts(response.products.data, response.positions);
+            
         },
         error: function(xhr, status, error) {
             console.error(error);
         }
     });
+
    
-    const displayProducts = (products) => {
+    const displayProducts = (products, positions) => {
            $('#table__result').empty();
            if (products.length === 0) {
             $('#table__result').append('<tr><td colspan="8" class="text text-center ">No products found</td></tr>');
            } else {
             $.each(products, function(index, product) {
                 $('#table__result').append(
-                    `<tr>
-                      
+                    positions === "Employee" ? 
+                    `
+                    <tr>
                         <td>
                             <img src="storage/${product.image}" alt="Product Image" width="70px">
                         </td>
@@ -57,7 +66,18 @@ $(document).ready(function() {
                             </form>
 
                         </td>
-                    </tr>`
+                    </tr>
+                    `:
+                    `<tr>
+                        <td>
+                            <img src="storage/${product.image}" alt="Product Image" width="70px">
+                        </td>
+                        <td>${product.prod_name}</td>
+                        <td>${product.quantity}</td>
+                        <td>${moment(product.created_at).calendar()}</td>
+                        <td style="color: ${product.Remarks === "PENDING" ? "red" : "blue"}; font-weight:bold;" >${product.Remarks}</td>
+                    </tr>
+                    `
                 );
             });
         }
@@ -149,8 +169,12 @@ $(document).ready(function() {
             type: 'GET',
             url: url,
             success: function(response) {
-
-                displayProducts(response.products.data);
+                if(response.positions === "Staff"){
+                    displayProducts(response.requestProduct.data, response.positions);
+                    return;
+                }
+    
+                displayProducts(response.products.data, response.positions);
                 $('#paginationContainer').html(response.pagination);
              
             },

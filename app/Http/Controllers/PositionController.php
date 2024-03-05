@@ -15,8 +15,9 @@ class PositionController extends Controller
       
         $email;
 
-        $user = User::select("s.email as email")
-        ->selectRaw("
+        $user = User::selectRaw("
+        s.id as id,
+        s.email as email,
         case when p.employee_position is null then 'NO POSITION' 
         else p.employee_position
         end as employee_positions 
@@ -24,7 +25,10 @@ class PositionController extends Controller
         ->from("users as s")
         ->leftJoin("positions as p","s.id","=","p.user_id")
         ->get()
-        ->where("employee_positions", "NO POSITION");
+        ->filter(function($user){
+            return $user->employee_positions === "NO POSITION";
+        });
+
 
         
         $positions = Position::select("employee_position", "s.email as email")

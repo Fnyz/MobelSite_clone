@@ -19,7 +19,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PositionController;
-use App\Http\Controllers\RequestController;
+use App\Http\Controllers\ProductRequestController;
 
 
 Route::middleware(['guest'])->group(function () {
@@ -42,7 +42,8 @@ Route::middleware(['auth'])->group(function () {
 
     //position route 
     Route::get('/position', [PositionController::class, 'showPosition'])->name('pages.position');
-    Route::get('/product/request', [RequestController::class, 'showRequest'])->name('pages.request');
+    Route::get('/product/request', [ProductRequestController::class, 'showRequest'])->name('pages.request');
+
 
     //supplier route
     Route::get('/supplier', [SupplierController::class, 'showSupplier'])->name('pages.supplier');
@@ -62,7 +63,7 @@ Route::middleware(['auth'])->group(function () {
     //position post request
     Route::post('/position/create', [PositionController::class, 'create']);
 
-
+    Route::post('/product/create/store', [ProductRequestController::class, 'store'])->name('storeRequest');
     Route::post('/supplier/create', [SupplierController::class, 'storeSupplier'])->name('storeSupplier');
     Route::post('/logout', [DashboardController::class, 'logout'])->name('logout');
     Route::post('/create', [ProductController::class, 'create'])->name('create_product');
