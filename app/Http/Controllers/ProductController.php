@@ -119,9 +119,6 @@ class ProductController extends Controller
         ->orderByDesc("p.id")
         ->simplePaginate(5);
 
-
-
-   
           
             $productRequestPaginated = DB::table(DB::raw('(
                 SELECT 

@@ -56,19 +56,23 @@ Route::middleware(['auth'])->group(function () {
     //transaction route
     Route::get('/transaction', [TransactionController::class, 'showTransaction'])->name('pages.transaction');
     Route::get('/transaction/getSupplierAndProduct', [TransactionController::class, 'getProductandSupplier']);
+    Route::get('/transaction/search', [TransactionController::class, 'search']);
     Route::get('/transaction/addTransacation', [TransactionController::class, 'showAddTransac'])->name('pages.transaction.transac');
+    Route::get('/transaction/record', [TransactionController::class, 'records'])->name('pages.transaction.record');
+
+  
     
 
 
     //position post request
     Route::post('/position/create', [PositionController::class, 'create']);
-
+    Route::post('/transaction/store', [TransactionController::class, 'store'])->name("storeTransaction");
     Route::post('/product/create/store', [ProductRequestController::class, 'store'])->name('storeRequest');
     Route::post('/supplier/create', [SupplierController::class, 'storeSupplier'])->name('storeSupplier');
     Route::post('/logout', [DashboardController::class, 'logout'])->name('logout');
     Route::post('/create', [ProductController::class, 'create'])->name('create_product');
-    Route::delete('/dashboard/{product}', [ProductController::class, 'delete'])->name('destroy'); // Corrected route name
-    Route::delete('/supplier/{supplier}', [SupplierController::class, 'delete'])->name('destroy'); // Corrected route name
+    Route::delete('/dashboard/{product}', [ProductController::class, 'delete'])->name('destroy'); 
+    Route::delete('/supplier/{supplier}', [SupplierController::class, 'delete'])->name('destroy');
 
     Route::put('/edit/{product}', [ProductController::class, 'edit'])->name('update_product');
     Route::put('/supplier/edit/{supplier}', [SupplierController::class, 'edit'])->name('update_supplier');

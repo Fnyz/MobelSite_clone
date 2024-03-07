@@ -71,7 +71,7 @@
     <form id="submitRequest" action="{{route("storeRequest")}}" >
         @csrf
         @method("POST")
-        <button type="submit" style="display: none;" class="btn btn-success" id="savePur" >Save Purchase</button>
+        <button type="submit" style="display: none;" class="btn btn-success" id="savePur" >Save Request</button>
     </form>
     
 

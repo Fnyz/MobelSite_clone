@@ -12,11 +12,11 @@
         @csrf
         @method("POST")
         <h2>Login</h2>
-        <input type="text" name="email" placeholder="Email" value="{{ old('email') }}" required>
+        <input type="text" name="email" placeholder="Email" value="{{ old('email') }}" >
         @error('email')
             <span class="error">{{ $message }}</span>
         @enderror
-        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="password" placeholder="Password" >
         @error('password')
             <span class="error">{{ $message }}</span>
         @enderror
