@@ -12,7 +12,7 @@ $(function(){
 
 
 
-    $('#submit').on('click', function(event) {
+    $('#form_submit').on('click', function(event) {
         event.preventDefault();
        const quan =  $("#quantity").val();
        const prod = $("#product_id").val();
@@ -42,6 +42,8 @@ $(function(){
             formDataArray.push(formData);
             displayFormData(formDataArray);
             $("#submitRequest .btn").show();
+            $("#quantity").val(0);
+
 
         }
     });

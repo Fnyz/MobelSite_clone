@@ -46,7 +46,7 @@
                 <td><input type="number" class="form-control"  id="quantity" name="quantity" value="0"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <button type="button" class="btn btn-success" id="submit"><i class="fa-solid fa-plus"></i></button>
+                        <button type="button" class="btn btn-success" id="form_submit"><i class="fa-solid fa-plus"></i></button>
                     </div>
                 </td>
             </tr>

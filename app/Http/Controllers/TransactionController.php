@@ -121,33 +121,34 @@ class TransactionController extends Controller
 
     public function records(Request $request){
 
+
+        $trans = $request->input("transaction");
+
         $transactions = DB::table(DB::raw("
         (
-        SELECT *,
-               SUM(subtotal) AS Total
-        FROM (
             SELECT 
-                s.supp_company AS supp_company, 
-                s.supp_phone AS supp_phone, 
-                t.trans_code AS trans_code,
-                u.email AS email, 
-                p.product_name AS prod_name, 
-                t.trans_quantity AS quantity, 
-                t.trans_price AS price,
-                t.user_id AS user_id, 
-                t.trans_price * t.trans_quantity AS subtotal,
-                t.trans_payment AS payment,
-                t.created_at AS trans_date
+            s.supp_image AS image,
+            s.supp_company AS supp_company, 
+            s.supp_phone AS supp_phone, 
+            t.trans_code AS trans_code,
+            u.email AS email, 
+            p.product_name AS prod_name, 
+            t.trans_quantity AS quantity, 
+            t.trans_price AS price,
+            t.user_id AS user_id, 
+            t.trans_price * t.trans_quantity AS subtotal,
+            t.trans_payment AS payment,
+            t.created_at AS trans_date
             FROM transactions AS t 
-            INNER JOIN suppliers AS s ON t.supplier_id = s.id
+            inner join suppliers AS s ON t.supplier_id = s.id
             JOIN products AS p ON t.product_id = p.id
             JOIN users AS u ON t.user_id = u.id
+            WHERE trans_code = '$trans'
         ) AS outer_query
-    ) AS outer_query
-    "))
-    ->select('*', DB::raw('payment - Total AS Total_change'))
-    ->where('trans_code', $request->input("transaction"))
-    ->get();
+        "))
+        ->select("*", DB::raw("payment - subtotal as Total_change, SUM(subtotal) as Total"))
+        ->get();
+
 
         return view("pages.Transaction.record", compact("transactions"));
     }

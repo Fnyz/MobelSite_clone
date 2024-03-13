@@ -11,7 +11,7 @@
 
    
   
-        <div>
+        <div style="margin-top: 10px;">
 
 
             <div class="card shadow mb-4">
@@ -20,9 +20,11 @@
                       @foreach ($transactions as $trans)
                           
                   
-                        <div class="form-group row text-left mb-0">
+                        <div class="form-group row text-left" ">
                             <div class="col-sm-9">
-                             
+                                <img src="/storage/{{$trans->image}}" alt="Product Image" width="100px" style="
+                                    border-radius:5px;
+                                    ">
                             </div>
 
                             <div class="col-sm-3 py-1">
@@ -35,7 +37,7 @@
                         <div class="form-group row text-left mb-0 py-2">
                             <div class="col-sm-4 py-1">
                                 <h6 class="font-weight-bold">
-                                    Supplier: {{$trans->supp_company}}
+                                    Supplier: <span style="font-weight: bold;"> {{$trans->supp_company}}</span>
                                 </h6>
                                 <h6>
                                     Phone: {{$trans->supp_phone}}
@@ -58,7 +60,7 @@
                         @endforeach
 
               
-                        @foreach ($transactions as $trans)
+                      
                           
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead>
@@ -70,7 +72,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                          
+                            @foreach ($transactions as $trans)
                                 <tr>
                                     <td>{{$trans->prod_name}}</td>
                                     <td>{{$trans->quantity}}</td>
@@ -78,13 +80,10 @@
                                     <td>₱ {{$trans->subtotal}}</td>
                          
                                 </tr>
-
+                            @endforeach
                         </tbody>
                     </table>
-
-
-           
-                        <div class="form-group row text-left mb-0 py-2">
+                        {{-- <div class="form-group row text-left mb-0 py-2">
                             <div class="col-sm-4 py-1"></div>
                             <div class="col-sm-3 py-1"></div>
                             <div class="col-sm-4 py-1">
@@ -104,13 +103,11 @@
                                         <td class="font-weight-bold text-right text-primary">₱ {{$trans->Total_change}} </td>
                                     </tr>
                                 </table>
-                            </div>
+                            </div> --}}
                             <div class="col-sm-1 py-1"></div>
                         </div>
 
-                        
-                    @break;
-                    @endforeach
+               
 
                  
                 </div>
